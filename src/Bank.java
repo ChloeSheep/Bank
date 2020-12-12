@@ -50,12 +50,22 @@ public class Bank {
             num=choice.nextLine();
             number=Integer.parseInt(num);
         }
+        int exist;
         switch (number) {
             case 1:
-
+                exist=isthereAccount(id,"Checking");
+                if (exist<0){
+                    int accountID=customers.get(id).createAccount("Checking");
+                    if (accountID>=0){
+                        System.out.println("You can check your money and your transaction records now.");
+                        ((CheckingAccount)customers.get(id).accounts.get(accountID)).Menu(customers.get(id));
+                    }
+                }else {
+                    ((CheckingAccount)customers.get(id).accounts.get(exist)).Menu(customers.get(id));
+                }
                 break;
             case 2:
-                int exist=isthereAccount(id,"Saving");
+                exist=isthereAccount(id,"Saving");
                 if (exist<0){
                     int accountID=customers.get(id).createAccount("Saving");
                     System.out.println("You can make savings and withdrawals now.");

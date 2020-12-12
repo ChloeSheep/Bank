@@ -44,21 +44,24 @@ public class Currency {
         }
     }
 
-    public void sub(String key ,double value){
+    public boolean sub(String key ,double value){
+        boolean success=false;
         if (check(key,value)==0){
         } else {
-            String cash=(Double.toString(1.02*value));
-            BigDecimal subNum = new BigDecimal(cash);
+            BigDecimal subNum = new BigDecimal(Double.toString(value));
+            subNum=subNum.multiply(new BigDecimal("1.02"));
             if (this.money.get(key).compareTo(subNum) == -1) {
                 System.out.println("Your balance is not enough!");
                 }
                 else{
                 this.money.put(key,this.money.get(key).subtract(subNum));
-                System.out.println("Successfully withdraw "+key+" "+cash+"!");
+                System.out.println("Successfully withdraw "+key+" "+subNum+"!");
                 System.out.println("Now your deposit: ");
                 Account.currency.print();
+                success=true;
                     }
                }
+        return success;
     }
 /*
     public static void main(String[] args) {
