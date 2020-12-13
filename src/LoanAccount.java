@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoanAccount extends Account {
-    public static final String loanRate="0.8";
+    public static final String loanRate="0.9";
     ArrayList<Collateral> collaterals=new ArrayList<>();
     LoanAccount(int id){
         super(id);
@@ -136,7 +136,7 @@ public class LoanAccount extends Account {
                     System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
                     createTransaction("0","Dollar","Failed to loan cause the collateral is too cheap.");
                 } else {
-                    System.out.println("Ok! We will loan you 80% of this collateral.");
+                    System.out.println("Ok! We will loan you 90% of this collateral.");
                     Account.currency.add("Dollar", priceD, loanRate);
                     Collateral collateral = new Collateral(name, item,"Dollar");
                     collaterals.add(collateral);
@@ -159,7 +159,7 @@ public class LoanAccount extends Account {
                     System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
                     createTransaction("0","RMB","Failed to loan cause the collateral is too cheap.");
                 } else {
-                    System.out.println("Ok! We will loan you 80% of this collateral.");
+                    System.out.println("Ok! We will loan you 90% of this collateral.");
                     Account.currency.add("RMB", priceR, loanRate);
                     Collateral collateral = new Collateral(name, item,"RMB");
                     collaterals.add(collateral);
@@ -182,7 +182,7 @@ public class LoanAccount extends Account {
                     System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
                     createTransaction("0","Pound","Failed to loan cause the collateral is too cheap.");
                 } else {
-                    System.out.println("Ok! We will loan you 80% of this collateral.");
+                    System.out.println("Ok! We will loan you 90% of this collateral.");
                     Account.currency.add("Pound", price, loanRate);
                     Collateral collateral = new Collateral(name, item,"Pound");
                     collaterals.add(collateral);
