@@ -5,6 +5,9 @@ public class Customer extends User{
     ArrayList<Account> accounts=new ArrayList<>();
     ArrayList<Transaction> transactions=new ArrayList<>();
     Customer(){}
+    Customer(String name,String pwd){
+        super(name,pwd);
+    }
     public void printRecords(){
         transactions.clear();
         if (accounts.size()==0){

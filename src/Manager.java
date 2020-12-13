@@ -3,10 +3,13 @@ import java.util.ArrayList;
 public class Manager extends User {
     private ArrayList<Customer>customers = new ArrayList<>();
 
-    public Manager() {
+    Manager() {
+    }
+    Manager(String name,String pwd){
+        super(name,pwd);
     }
 
-    public Manager(ArrayList<Customer> customers) {
+    Manager(ArrayList<Customer> customers) {
         this.customers = customers;
     }
 
