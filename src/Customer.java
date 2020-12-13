@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Customer extends User{
-    private int id;
+
     ArrayList<Account> accounts=new ArrayList<>();
     ArrayList<Transaction> transactions=new ArrayList<>();
     Customer(){}
@@ -38,8 +38,7 @@ public class Customer extends User{
         return accountID;
 
     }
-    public void setId(int number){id=number;}
-    public int getId(){return id;}
+
 
 
 }

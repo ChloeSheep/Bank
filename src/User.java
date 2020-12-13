@@ -4,12 +4,15 @@ import java.util.Scanner;
 public class User {
     String name;
     String pwd;
+    int id;
 
     User(){}
     public void initUserInfo(){
         initUserName();
         initUserPwd();
     }
+    public void setId(int number){id=number;}
+    public int getId(){return id;}
     public void initUserName(){
         Scanner username=new Scanner(System.in);
         System.out.println("Dear new user, please enter your name: ");
