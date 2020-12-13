@@ -74,14 +74,19 @@ public class Bank {
                 ((SavingAccount) customers.get(id).accounts.get(exist)).Menu();}
                 break;
             case 3:
+                exist=isthereAccount(id,"Loan");
+                if (exist<0){
+                    int accountID=customers.get(id).createAccount("Loan");
+                    ((LoanAccount)customers.get(id).accounts.get(accountID)).Menu();
+                }else {
+                    ((LoanAccount)customers.get(id).accounts.get(exist)).Menu();
+                }
                 break;
             case 4:
                 System.out.println("Bye bye!");
                 userend=false;
                 break;
-
         }
-
     }
     public static int isthereAccount(int id,String str){
         Customer customer=customers.get(id);

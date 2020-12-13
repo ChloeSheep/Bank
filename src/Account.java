@@ -22,10 +22,7 @@ public abstract class Account {
       System.out.println("Invalid input. Please input a number.");
       cash=money.nextLine();
     }
-    Account.currency.add(type,Double.parseDouble(cash));
-    System.out.println("Successfully save "+type+" "+cash+"!");
-    System.out.println("Now your deposit: ");
-    Account.currency.print();
+    Account.currency.add(type,Double.parseDouble(cash),"1");
     return cash;
   }
   public String withdraw(String type){
@@ -37,7 +34,7 @@ public abstract class Account {
       System.out.println("Invalid input. Please input a number.");
       cash=money.nextLine();
     }
-    boolean success=Account.currency.sub(type,Double.parseDouble(cash));
+    boolean success=Account.currency.sub(type,Double.parseDouble(cash),"1.02");
     if (!success){
       return "";}else {
       return Double.toString(Double.parseDouble(cash));

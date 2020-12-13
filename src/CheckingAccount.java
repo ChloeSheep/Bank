@@ -17,7 +17,7 @@ public class CheckingAccount extends Account{
             return false;
         }else {
             //withdraw
-            Account.currency.sub("Dollar",5);
+            Account.currency.sub("Dollar",5,"1");
             createTransaction("Open checking account.");
             return true;
         }
@@ -48,7 +48,7 @@ public class CheckingAccount extends Account{
     }
     public void checkRecords(Customer customer){
         System.out.println("This costs you 2 dollars.");
-        boolean success=Account.currency.sub("Dollar",(double)2);
+        boolean success=Account.currency.sub("Dollar",(double)2,"1");
         if (success){
             customer.printRecords();
         createTransaction("Checking transactions.");}

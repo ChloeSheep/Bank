@@ -1,13 +1,24 @@
 public class Collateral {
     private String item;
-    private int price;
+    private String price;
+
+    public String getCurrencyType() {
+        return currencyType;
+    }
+
+    public void setCurrencyType(String currencyType) {
+        this.currencyType = currencyType;
+    }
+
+    private String currencyType;
 
     public Collateral() {
     }
 
-    public Collateral(String item, int price) {
+    public Collateral(String item, String price,String currencyType) {
         this.item = item;
         this.price = price;
+        this.currencyType=currencyType;
     }
 
     public String getItem() {
@@ -18,11 +29,11 @@ public class Collateral {
         this.item = item;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -30,11 +41,12 @@ public class Collateral {
     public String toString() {
         return "Your collateral information:" + '\n' +
                 "item= " + item + ' ' +
-                "price= " + price;
+                "currencyType= "+currencyType+
+                " price= " + price;
     }
 
-    public static void main(String[] args) {
-        Collateral myCar = new Collateral("car",10000);
-        System.out.println(myCar);
-    }
+//    public static void main(String[] args) {
+//        Collateral myCar = new Collateral("car",10000);
+//        System.out.println(myCar);
+//    }
 }

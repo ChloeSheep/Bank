@@ -36,20 +36,26 @@ public class Currency {
             return 1;
     }
 
-    public void add(String key ,double value){
+    //str is the rate of the value, like when you wanna add 80% of the value to the currency, your str is "0.8"
+    //This is because double multiply gets wrong answer all the time so it's hard to do computation outside add and sub functions
+    public void add(String key ,double value,String str){
         if (check(key,value)==0){
         } else {
             BigDecimal addNum = new BigDecimal(Double.toString(value));
+            addNum=addNum.multiply(new BigDecimal(str));
             this.money.put(key,this.money.get(key).add(addNum));
+            System.out.println("Successfully save "+key+" "+addNum+"!");
+            System.out.println("Now your deposit: ");
+            Account.currency.print();
         }
     }
 
-    public boolean sub(String key ,double value){
+    public boolean sub(String key ,double value,String str){
         boolean success=false;
         if (check(key,value)==0){
         } else {
             BigDecimal subNum = new BigDecimal(Double.toString(value));
-            subNum=subNum.multiply(new BigDecimal("1.02"));
+            subNum=subNum.multiply(new BigDecimal(str));
             if (this.money.get(key).compareTo(subNum) == -1) {
                 System.out.println("Your balance is not enough!");
                 }

@@ -13,7 +13,7 @@ public class SavingAccount extends Account {
         System.out.println("To create a checking account, you will have to save at least 5 dollars in our account.");
         save("Dollar");
         System.out.println("Automatically charge you $5!");
-        Account.currency.sub("Dollar",5);
+        Account.currency.sub("Dollar",5,"1");
         createTransaction("Open Saving account.");
     }
     public void Menu(){
