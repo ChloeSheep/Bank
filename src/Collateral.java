@@ -39,10 +39,10 @@ public class Collateral {
 
     @Override
     public String toString() {
-        return "Your collateral information:" + '\n' +
-                "item= " + item + ' ' +
-                "currencyType= "+currencyType+
-                " price= " + price;
+        return "Collateral information:" + '\n' +
+                "item = " + item + ' ' +
+                "currencyType = "+currencyType+
+                " price = " + price+'\n';
     }
 
 //    public static void main(String[] args) {

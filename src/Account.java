@@ -4,9 +4,9 @@ import java.util.Scanner;
 public abstract class Account {
 
   String accountType;
+  int accountID;
   ArrayList<Transaction> transactions=new ArrayList<>();
   static Currency currency = new Currency();
-  Time time=new Time();
   int customerID;
   Account(int id){
     customerID=id;
@@ -40,5 +40,5 @@ public abstract class Account {
       return Double.toString(Double.parseDouble(cash));
     }
   }
-  public abstract void createTransaction(String action);
+  public abstract void createTransaction(String moneychange,String type,String action);
 }

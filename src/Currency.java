@@ -20,7 +20,13 @@ public class Currency {
     public void print() {
         System.out.println(this.money);
     }
-
+    public boolean is_empty(){
+        for (HashMap.Entry<String, BigDecimal> entry : money.entrySet()) {
+            if(entry.getValue().compareTo(BigDecimal.ZERO)!= 0){
+            return false;
+        }}
+        return true;
+    }
     public BigDecimal get(String key){
         return money.get(key);
     }

@@ -8,13 +8,13 @@ public class SavingAccount extends Account {
     }
     public void initAccount(){
         System.out.println("Welcome! You will save and withdraw money here, starting today.");
-        System.out.println("Openning this count will charge you 5 dollars.");
+        System.out.println("Opening this count will charge you 5 dollars.");
         System.out.println("You can use 3 types of currency in our bank(Dollar, RMB and Pound).");
         System.out.println("To create a checking account, you will have to save at least 5 dollars in our account.");
         save("Dollar");
         System.out.println("Automatically charge you $5!");
         Account.currency.sub("Dollar",5,"1");
-        createTransaction("Open Saving account.");
+        createTransaction("-5","Dollar","Open Saving account.");
     }
     public void Menu(){
         System.out.println("1. Save money 2. Withdraw money 3. Exit");
@@ -46,13 +46,13 @@ public class SavingAccount extends Account {
             }
             if (number1==1){
                 String cash=save("Dollar");
-                createTransaction("Saving dollars $"+cash+".");
+                createTransaction(cash,"Dollar","Saving dollars $"+cash+".");
             }else if (number1==2){
                 String cash=save("RMB");
-                createTransaction("Saving RMBs ¥"+cash+".");
+                createTransaction(cash,"RMB","Saving RMBs ¥"+cash+".");
             }else {
                 String cash=save("Pound");
-                createTransaction("Saving pounds ￡"+cash+".");
+                createTransaction(cash,"Pound","Saving pounds ￡"+cash+".");
             }
         }else if (number==2){
             System.out.println("1. Dollar 2. RMB 3. Pound");
@@ -71,32 +71,38 @@ public class SavingAccount extends Account {
             if (number1==1){
                 String cash=withdraw("Dollar");
                 if (cash.equals("")){
-                    createTransaction("Failed to withdraw dollars.");
+                    createTransaction("0","Dollar","Failed to withdraw dollars.");
                 }else {
-                createTransaction("Withdraw dollars $"+cash+".");}
+                createTransaction("-"+cash,"Dollar","Withdraw dollars $"+cash+".");}
             }else if (number1==2){
                 String cash=withdraw("RMB");
                 if (cash.equals("")){
-                    createTransaction("Failed to withdraw RMBs.");
+                    createTransaction("0","RMB","Failed to withdraw RMBs.");
                 }else {
-                    createTransaction("Withdraw RMBs ¥"+cash+".");}
+                    createTransaction("-"+cash,"RMB","Withdraw RMBs ¥"+cash+".");}
             }else {
                 String cash=withdraw("Pound");
                 if (cash.equals("")){
-                    createTransaction("Failed to withdraw pounds.");
+                    createTransaction("0","Pound","Failed to withdraw pounds.");
                 }else {
-                    createTransaction("Withdraw pounds ￡"+cash+".");}
+                    createTransaction("-"+cash,"Pound","Withdraw pounds ￡"+cash+".");}
             }
         }else {
             return;
         }
     }
 
-    public void createTransaction(String action){
+    public void createTransaction(String moneychange,String currencyType,String action){
+        Time time=new Time();
         String str=time+ " Customer "+(customerID+1)+" in Saving account: "+action;
         Transaction transaction=new Transaction();
         transaction.setInfo(str);
+        transaction.setAccountType(accountType);
+        transaction.setCurrencyType(currencyType);
+        transaction.setCurrentCurrency(Account.currency);
+        transaction.setCustomerID(customerID);
+        transaction.setTime(time);
+        transaction.setMoneyChange(moneychange);
         transactions.add(transaction);
-
     }
 }
