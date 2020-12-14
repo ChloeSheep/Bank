@@ -29,5 +29,9 @@ Manager-可以查看所有customer（粗略信息），根据ID或者姓名查�
 一次性的程序，所以每次运行都要新建账户。现在只能建立新用户。
 暂时不考虑利息和日期问题，故没有实现interest和daily report
 
+12-14
+loanaccount修改成只能用美元这一种货币，不过currency本身作为拥有三种货币的hashmap没有变，只是在loanaccount里只能选择其中的美元进行操作
+collateral类里的price数据成员更改为BigDecimal类型
+
 基本设定：account中，check和save开通要5美元，loan要8美元，注销账户各要5美元，每次取钱要2%手续费，抵押贷款给90%的抵押物价钱，
 每次check钱1美元，check交易记录2美元

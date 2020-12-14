@@ -1,6 +1,17 @@
+import java.math.BigDecimal;
+
 public class Collateral {
     private String item;
-    private String price;
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    private BigDecimal price;
 
     public String getCurrencyType() {
         return currencyType;
@@ -15,7 +26,7 @@ public class Collateral {
     public Collateral() {
     }
 
-    public Collateral(String item, String price,String currencyType) {
+    public Collateral(String item, BigDecimal price,String currencyType) {
         this.item = item;
         this.price = price;
         this.currencyType=currencyType;
@@ -27,14 +38,6 @@ public class Collateral {
 
     public void setItem(String item) {
         this.item = item;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     @Override

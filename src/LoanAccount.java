@@ -16,7 +16,7 @@ public class LoanAccount extends Account {
     public boolean initAccount(){
         System.out.println("Welcome! You will be applying loans and pay for collterals here, starting today.");
         System.out.println("Opening this count will charge you 8 dollars. Make sure you have created the saving count and save at least 8 dollars in it.");
-        System.out.println("Although you can use 3 types of currency in our bank(Dollar, RMB and Pound), you need to pay dollars this time.");
+        System.out.println("Loan account only permits dollars.");
         if (Account.currency.get("Dollar").compareTo(new BigDecimal(8)) < 0){
             System.out.println("You don't have 8 dollars!");
             System.out.println("Fail to open a loan account.");
@@ -80,8 +80,8 @@ public class LoanAccount extends Account {
             }
         }
         if (id>=0){
-            String price=collaterals.get(id).getPrice();
-            boolean success=Account.currency.sub(collaterals.get(id).getCurrencyType(),Double.parseDouble(price),"1");
+            BigDecimal price=collaterals.get(id).getPrice();
+            boolean success=Account.currency.sub(collaterals.get(id).getCurrencyType(),price.doubleValue(),"1");
             if (success){
                 System.out.println("Now you have your "+collaterals.get(id).getItem()+" again!");
                 System.out.println("Thank you for using our bank！");
@@ -109,90 +109,27 @@ public class LoanAccount extends Account {
                     name=colla.nextLine();
                     break;
                 }alreadyExist=false;} }}
-        System.out.println("Which currency do you want to get?");
-        System.out.println("1. Dollar 2. RMB 3. Pound");
-        item=colla.nextLine();
-        while(!Tool.is_number(item)){
-            System.out.println("Invalid input. Input again.");
-            item=colla.nextLine();
-        }
-        int number=Integer.parseInt(item);
-        while (number<1||number>3){
-            System.out.println("Invalid input. Input again.");
-            item=colla.nextLine();
-            number=Integer.parseInt(item);
-        }
-        switch (number) {
-            case 1 -> {
-                System.out.println("Please make sure that your collateral is over $250 or we won't make a loan for you.");
-                System.out.println("The price of your collateral($):");
-                item = colla.nextLine();
-                while (!Tool.is_number(item)) {
+        System.out.println("Please make sure that your collateral is over $250 or we won't make a loan for you.");
+        System.out.println("The price of your collateral($):");
+        item = colla.nextLine();
+        while (!Tool.is_number(item)) {
                     System.out.println("Invalid input. Input again.");
                     item = colla.nextLine();
-                }
-                double priceD = Double.parseDouble(item);
-                if (priceD < 250) {
+        }
+        double priceD = Double.parseDouble(item);
+        if (priceD < 250) {
                     System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
                     createTransaction("0","Dollar","Failed to loan cause the collateral is too cheap.");
-                } else {
+        } else {
                     System.out.println("Ok! We will loan you 90% of this collateral.");
                     Account.currency.add("Dollar", priceD, loanRate);
-                    Collateral collateral = new Collateral(name, item,"Dollar");
+                    Collateral collateral = new Collateral(name, new BigDecimal(item),"Dollar");
                     collaterals.add(collateral);
                     BigDecimal addNum = new BigDecimal(Double.toString(priceD));
                     addNum=addNum.multiply(new BigDecimal(loanRate));
                     String money=addNum.toString();
                     createTransaction(money,"Dollar","Apply for a loan. " + collateral);
                 }
-            }
-            case 2 -> {
-                System.out.println("Please make sure that your collateral is over ¥2000 or we won't make a loan for you.");
-                System.out.println("The price of your collateral(¥):");
-                item = colla.nextLine();
-                while (!Tool.is_number(item)) {
-                    System.out.println("Invalid input. Input again.");
-                    item = colla.nextLine();
-                }
-                double priceR = Double.parseDouble(item);
-                if (priceR < 2000) {
-                    System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
-                    createTransaction("0","RMB","Failed to loan cause the collateral is too cheap.");
-                } else {
-                    System.out.println("Ok! We will loan you 90% of this collateral.");
-                    Account.currency.add("RMB", priceR, loanRate);
-                    Collateral collateral = new Collateral(name, item,"RMB");
-                    collaterals.add(collateral);
-                    BigDecimal addNum = new BigDecimal(Double.toString(priceR));
-                    addNum=addNum.multiply(new BigDecimal(loanRate));
-                    String money=addNum.toString();
-                    createTransaction(money,"RMB","Apply for a loan. " + collateral);
-                }
-            }
-            case 3 -> {
-                System.out.println("Please make sure that your collateral is over ￡200 or we won't make a loan for you.");
-                System.out.println("The price of your collateral(￡):");
-                item = colla.nextLine();
-                while (!Tool.is_number(item)) {
-                    System.out.println("Invalid input. Input again.");
-                    item = colla.nextLine();
-                }
-                double price = Double.parseDouble(item);
-                if (price < 200) {
-                    System.out.println("Your item is too cheap and cannot be a collateral in our bank, sorry.");
-                    createTransaction("0","Pound","Failed to loan cause the collateral is too cheap.");
-                } else {
-                    System.out.println("Ok! We will loan you 90% of this collateral.");
-                    Account.currency.add("Pound", price, loanRate);
-                    Collateral collateral = new Collateral(name, item,"Pound");
-                    collaterals.add(collateral);
-                    BigDecimal addNum = new BigDecimal(Double.toString(price));
-                    addNum=addNum.multiply(new BigDecimal(loanRate));
-                    String money=addNum.toString();
-                    createTransaction(money,"Pound","Apply for a loan. " + collateral);
-                }
-            }
-        }
     }
     public void checkLoans(){
           if (collaterals.size()==0){
